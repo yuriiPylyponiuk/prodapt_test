@@ -1,5 +1,10 @@
 {
-  "extends": ["@react-native-community", "prettier", "eslint:recommended"],
+  "extends": [
+    "@react-native-community",
+    "universe/native",
+    "prettier",
+    "eslint:recommended"
+  ],
   "globals": {
     "JSX": true,
     "NodeJS": true,
@@ -28,7 +33,7 @@
     "react/self-closing-comp": ["error", { "component": true, "html": true }],
     "max-len": [
       "error",
-      { "code": 80, "ignoreRegExpLiterals": true, "ignoreStrings": true }
+      { "code": 120, "ignoreRegExpLiterals": true, "ignoreStrings": true }
     ]
   },
   "overrides": [

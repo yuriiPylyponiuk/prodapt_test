@@ -1,4 +1,5 @@
 import { combineReducers, createStore } from 'redux'
+
 import WeatherReducer from './wether/weatherReducer'
 
 const rootReducer = combineReducers({

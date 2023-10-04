@@ -12,12 +12,12 @@ export const WeatherPage = () => {
 
   useEffect(() => {
     ;(async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync()
+      const { status } = await Location.requestForegroundPermissionsAsync()
       if (status !== 'granted') {
         return
       }
 
-      let location = await Location.getCurrentPositionAsync({})
+      const location = await Location.getCurrentPositionAsync({})
       const { latitude, longitude } = location.coords
       console.log(latitude)
       console.log(longitude)
@@ -26,7 +26,7 @@ export const WeatherPage = () => {
 
   return (
     <Layout>
-      <Label title={'pla'} userColor="error" />
+      <Label title={'pla'} userColor={'error'} />
     </Layout>
   )
 }

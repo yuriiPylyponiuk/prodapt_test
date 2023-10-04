@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react-native'
 import React from 'react'
 import { View } from 'react-native'
+
 import { Label } from '.'
 
 const LabelMeta: ComponentMeta<typeof Label> = {

@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react-native'
 import React from 'react'
 import { View } from 'react-native'
+
 import { Button } from '.'
 
 const ButtonMeta: ComponentMeta<typeof Button> = {

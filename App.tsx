@@ -1,6 +1,7 @@
 import Constants from 'expo-constants'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components/native'
+
 import { theme } from './components/theme'
 import { WeatherPage } from './src/pages/WeatherPage'
 import { store } from './src/redux/configureStore'

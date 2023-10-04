@@ -1,6 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import styled from 'styled-components/native'
+
 import { LabelColorType } from '../../theme/types'
 import { Label } from '../Label'
 
@@ -10,13 +11,11 @@ interface ButtonPropsType extends TouchableOpacityProps {
   textColor: LabelColorType
 }
 
-export const Button = ({ onPress, text, textColor }: ButtonPropsType) => {
-  return (
-    <CastomButton onPress={onPress}>
-      <Label userColor={textColor} title={text} />
-    </CastomButton>
-  )
-}
+export const Button = ({ onPress, text, textColor }: ButtonPropsType) => (
+  <CastomButton onPress={onPress}>
+    <Label userColor={textColor} title={text} />
+  </CastomButton>
+)
 
 const CastomButton = styled(TouchableOpacity)`
   padding-horizontal: 32px;
