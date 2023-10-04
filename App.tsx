@@ -1,18 +1,26 @@
-import { StyleSheet, Text, View } from "react-native";
 import Constants from "expo-constants";
+import { StyleSheet, Text, View } from "react-native";
+import { ThemeProvider } from "styled-components/native";
+import { theme } from "./components/theme";
 
 function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <ThemeProvider theme={theme}>
+      {Constants.expoConfig?.extra?.storybookEnabled ? (
+        (AppEntryPoint = require("./.ondevice/storybookScreen").default)
+      ) : (
+        <View style={styles.container}>
+          <Text>Open up App.tsx to start working on your app!</Text>
+        </View>
+      )}
+    </ThemeProvider>
   );
 }
 
 let AppEntryPoint = App;
 
 if (Constants.expoConfig?.extra?.storybookEnabled === "true") {
-  AppEntryPoint = require("./.ondevice").default;
+  AppEntryPoint = require("./.ondevice/storybookScreen").default;
 }
 
 const styles = StyleSheet.create({
