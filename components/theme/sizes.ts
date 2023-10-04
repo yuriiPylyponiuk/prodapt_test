@@ -1,17 +1,17 @@
-import { Dimensions } from "react-native";
+import { Dimensions } from 'react-native'
 
-const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
+const { width: windowWidth, height: windowHeight } = Dimensions.get('window')
 
-type ViewportSizeFunctionType = (size: number) => number;
+type ViewportSizeFunctionType = (size: number) => number
 
 interface ViewportSizesType {
-  height: ViewportSizeFunctionType;
-  width: ViewportSizeFunctionType;
+  height: ViewportSizeFunctionType
+  width: ViewportSizeFunctionType
 }
 
 interface ViewportDefaultSizesType {
-  width: ViewportSizeFunctionType;
-  height: ViewportSizeFunctionType;
+  width: ViewportSizeFunctionType
+  height: ViewportSizeFunctionType
 }
 
 export const viewportSizes: ViewportSizesType = {
@@ -19,12 +19,12 @@ export const viewportSizes: ViewportSizesType = {
     Math.round(viewportDefaultSizes.height((1.3 * height) / 10)),
 
   width: (width) => Math.round(viewportDefaultSizes.width((2.65 * width) / 10)),
-};
+}
 
 const viewportDefaultSizes: ViewportDefaultSizesType = {
   width: (width) => (width * windowWidth) / 100,
   height: (height) => (height * windowHeight) / 100,
-};
+}
 
 const main = {
   // generic sizes
@@ -102,14 +102,14 @@ const main = {
   width200: viewportSizes.width(200),
   width250: viewportSizes.width(250),
   width300: viewportSizes.width(300),
-};
+}
 
 const borderWidth = {
   default: main.size1,
   width0: main.size0,
   width1: main.size1,
   width2: main.size2,
-};
+}
 
 const button = {
   default: main.height60,
@@ -126,7 +126,7 @@ const button = {
   height120: main.height120,
   height130: main.height130,
   height140: main.height140,
-};
+}
 
 const borderRadius = {
   ...button,
@@ -139,7 +139,7 @@ const borderRadius = {
   radius15: main.height15,
   radius20: main.height20,
   radius30: main.height30,
-};
+}
 
 const icon = {
   default: main.height14,
@@ -153,7 +153,7 @@ const icon = {
   height20: main.height20,
   height24: main.height24,
   height40: main.height40,
-};
+}
 
 const image = {
   default: main.height40,
@@ -170,9 +170,9 @@ const image = {
   height100: main.height100,
   height150: main.height150,
   height160: main.height160,
-};
+}
 
-const input = { ...button, default: main.height50 };
+const input = { ...button, default: main.height50 }
 
 const label = {
   default: main.height16,
@@ -190,7 +190,7 @@ const label = {
   height26: main.height26,
   height30: main.height30,
   height40: main.height40,
-};
+}
 
 const layout = {
   ...button,
@@ -206,7 +206,7 @@ const layout = {
   width40: main.width40,
   width50: main.width50,
   width70: main.width70,
-};
+}
 
 export const sizes = {
   borderRadius,
@@ -218,4 +218,4 @@ export const sizes = {
   label,
   layout,
   main,
-};
+}

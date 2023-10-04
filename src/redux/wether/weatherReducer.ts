@@ -1,8 +1,8 @@
-import * as types from "./weatherActionTypes";
+import * as types from './weatherActionTypes'
 
 const initialState = {
   weather: {},
-};
+}
 
 export default function reducer(state = initialState, action: any) {
   switch (action.type) {
@@ -15,7 +15,7 @@ export default function reducer(state = initialState, action: any) {
           error: false,
           show: false,
         },
-      };
+      }
     case types.GET_WEATHER_SUCCESS:
       return {
         ...state,
@@ -25,7 +25,7 @@ export default function reducer(state = initialState, action: any) {
           error: false,
           show: true,
         },
-      };
+      }
     case types.GET_WEATHER_FAILED:
       return {
         ...state,
@@ -35,9 +35,9 @@ export default function reducer(state = initialState, action: any) {
           error: true,
           show: false,
         },
-      };
+      }
 
     default:
-      return state;
+      return state
   }
 }

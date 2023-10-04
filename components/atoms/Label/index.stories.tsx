@@ -1,14 +1,14 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react-native";
-import React from "react";
-import { View } from "react-native";
-import { Label } from ".";
+import { ComponentMeta, ComponentStory } from '@storybook/react-native'
+import React from 'react'
+import { View } from 'react-native'
+import { Label } from '.'
 
 const LabelMeta: ComponentMeta<typeof Label> = {
-  title: "Label",
+  title: 'Label',
   component: Label,
   args: {
-    title: "Hello world",
-    userColor: "brand1",
+    title: 'Hello world',
+    userColor: 'brand1',
   },
   decorators: [
     (Story) => (
@@ -17,10 +17,10 @@ const LabelMeta: ComponentMeta<typeof Label> = {
       </View>
     ),
   ],
-};
+}
 
-export default LabelMeta;
+export default LabelMeta
 
-type LabelStory = ComponentStory<typeof Label>;
+type LabelStory = ComponentStory<typeof Label>
 
-export const Basic: LabelStory = (args) => <Label {...args} />;
+export const Basic: LabelStory = (args) => <Label {...args} />

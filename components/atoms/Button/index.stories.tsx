@@ -1,14 +1,14 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react-native";
-import React from "react";
-import { View } from "react-native";
-import { Button } from ".";
+import { ComponentMeta, ComponentStory } from '@storybook/react-native'
+import React from 'react'
+import { View } from 'react-native'
+import { Button } from '.'
 
 const ButtonMeta: ComponentMeta<typeof Button> = {
-  title: "Button",
+  title: 'Button',
   component: Button,
   args: {
-    text: "Hello world",
-    textColor: "content1",
+    text: 'Hello world',
+    textColor: 'content1',
   },
   decorators: [
     (Story) => (
@@ -17,10 +17,10 @@ const ButtonMeta: ComponentMeta<typeof Button> = {
       </View>
     ),
   ],
-};
+}
 
-export default ButtonMeta;
+export default ButtonMeta
 
-type ButtonStory = ComponentStory<typeof Button>;
+type ButtonStory = ComponentStory<typeof Button>
 
-export const Basic: ButtonStory = (args) => <Button {...args} />;
+export const Basic: ButtonStory = (args) => <Button {...args} />
