@@ -1,6 +1,14 @@
 {
   "expo": {
     "name": "AwesomeStorybook",
-    "slug": "AwesomeStorybook"
+    "slug": "AwesomeStorybook",
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ]
+    ]
   }
 }

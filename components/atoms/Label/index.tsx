@@ -5,7 +5,7 @@ import { LabelColorType } from "../../theme/types";
 
 export interface LabelPropsType extends TextProps {
   title: string;
-  userColor: LabelColorType;
+  userColor?: LabelColorType;
 }
 
 export const Label = ({ title, ...props }: LabelPropsType) => {
