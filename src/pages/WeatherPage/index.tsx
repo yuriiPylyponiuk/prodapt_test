@@ -1,8 +1,8 @@
-import React from "react";
-import { View } from "react-native";
+import * as Location from "expo-location";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components/native";
-import { Button } from "../../../components/atoms/Button";
+
 import { Label } from "../../../components/atoms/Label";
 import { RootState } from "../../redux/configureStore";
 
@@ -10,9 +10,23 @@ export const WeatherPage = () => {
   const dispatch = useDispatch();
   const weather = useSelector((state: RootState) => state.wether);
 
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      const { latitude, longitude } = location.coords;
+      console.log(latitude);
+      console.log(longitude);
+    })();
+  }, []);
+
   return (
     <Layout>
-      <Label title={"placeHolder"} userColor="error" />
+      <Label title={"pla"} userColor="error" />
     </Layout>
   );
 };
