@@ -1,6 +1,3 @@
-export const GET_WEATHER_REQUEST = 'GET_WEATHER_REQUEST'
-export const GET_WEATHER_SUCCESS = 'GET_WEATHER_SUCCESS'
-export const GET_WEATHER_FAILED = 'GET_WEATHER_FAILED'
+export const SET_WEATHER = 'SET_WEATHER'
 
-export const INCR = 'INCR'
-export const DEC = 'DEC'
+export const SET_CITY = 'SET_CITY'

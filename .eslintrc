@@ -1,10 +1,5 @@
 {
-  "extends": [
-    "@react-native-community",
-    "universe/native",
-    "prettier",
-    "eslint:recommended"
-  ],
+  "extends": ["@react-native-community", "universe/native", "prettier", "eslint:recommended"],
   "globals": {
     "JSX": true,
     "NodeJS": true,
@@ -19,22 +14,16 @@
     "arrow-body-style": ["error", "as-needed"],
     "no-console": ["error", { "allow": ["debug", "error", "info", "warn"] }],
     "no-unused-vars": "error",
+    "no-extra-semi": "off",
     "object-shorthand": ["error", "always"],
-    "quotes": [
-      "error",
-      "single",
-      { "allowTemplateLiterals": true, "avoidEscape": true }
-    ],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true, "avoidEscape": true }],
     "quote-props": ["warn", "consistent-as-needed"],
     "radix": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "off",
     "react/jsx-curly-brace-presence": ["error", "always"],
     "react/self-closing-comp": ["error", { "component": true, "html": true }],
-    "max-len": [
-      "error",
-      { "code": 120, "ignoreRegExpLiterals": true, "ignoreStrings": true }
-    ]
+    "max-len": ["error", { "code": 110, "ignoreRegExpLiterals": true, "ignoreStrings": true }]
   },
   "overrides": [
     {

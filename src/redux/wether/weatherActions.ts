@@ -1,9 +1,9 @@
 import * as types from './weatherActionTypes'
 
-export function getAllProductsRequestAction() {
-  return { type: types.GET_WEATHER_REQUEST }
+export function setWeather(weatherData: any) {
+  return { type: types.SET_WEATHER, payload: weatherData }
 }
 
-export function getAllProductsSuccessAction(payload: any) {
-  return { type: types.GET_WEATHER_SUCCESS, payload }
+export function setCity(city: string) {
+  return { type: types.SET_CITY, payload: city }
 }

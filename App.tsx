@@ -2,7 +2,9 @@ import Constants from 'expo-constants'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components/native'
 
+import { ApiProvider } from '@reduxjs/toolkit/dist/query/react'
 import { theme } from './components/theme'
+import { apiSlice } from './src/api/weatherSlice'
 import { WeatherPage } from './src/pages/WeatherPage'
 import { store } from './src/redux/configureStore'
 

@@ -2,39 +2,21 @@ import * as types from './weatherActionTypes'
 
 const initialState = {
   weather: {},
+  city: '',
 }
 
-export default function reducer(state = initialState, action: any) {
+export default function weatherReducer(state = initialState, action: any) {
   switch (action.type) {
-    case types.GET_WEATHER_REQUEST:
+    case types.SET_WEATHER:
       return {
         ...state,
-        products: {
-          data: false,
-          loaded: true,
-          error: false,
-          show: false,
-        },
+        weather: action.payload,
       }
-    case types.GET_WEATHER_SUCCESS:
+
+    case types.SET_CITY:
       return {
         ...state,
-        products: {
-          data: action.payload,
-          loaded: false,
-          error: false,
-          show: true,
-        },
-      }
-    case types.GET_WEATHER_FAILED:
-      return {
-        ...state,
-        products: {
-          data: false,
-          loaded: false,
-          error: true,
-          show: false,
-        },
+        city: action.payload,
       }
 
     default:
