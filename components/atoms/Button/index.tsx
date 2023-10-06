@@ -1,26 +1,29 @@
 import React from 'react'
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
+import { TouchableOpacityProps } from 'react-native'
 import styled from 'styled-components/native'
 
-import { LabelColorType } from '../../theme/types'
+import { ButtonColorType, LabelColorType } from '../../theme/types'
 import { Label } from '../Label'
 
-interface ButtonPropsType extends TouchableOpacityProps {
-  onPress: () => void
+export interface ButtonPropsType extends TouchableOpacityProps {
+  onPress?: () => void
   text: string
   textColor: LabelColorType
+  pWidth?: number
+  pHeight?: number
+  bgColor?: ButtonColorType
 }
 
-export const Button = ({ onPress, text, textColor }: ButtonPropsType) => (
-  <CastomButton onPress={onPress}>
-    <Label userColor={textColor} title={text} />
+export const Button = ({ onPress = () => {}, text, textColor, ...props }: ButtonPropsType) => (
+  <CastomButton {...props} onPress={onPress}>
+    <Label color={textColor} title={text} />
   </CastomButton>
 )
 
-const CastomButton = styled(TouchableOpacity)`
-  padding-horizontal: 32px;
-  padding-vertical: 8px;
-  background-color: #0084ff;
+const CastomButton = styled.TouchableOpacity<ButtonPropsType>`
+  padding-horizontal: ${({ pWidth }) => (pWidth ? pWidth : 32)}px;
+  padding-vertical: ${({ pHeight }) => (pHeight ? pHeight : 13)}px;
+  background-color: ${({ bgColor, theme }) => (bgColor ? theme.colors.button[bgColor] : 'brandLight')};
   align-self: flex-start;
   border-radius: 8px;
 `

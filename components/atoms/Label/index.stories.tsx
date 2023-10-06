@@ -9,7 +9,7 @@ const LabelMeta: ComponentMeta<typeof Label> = {
   component: Label,
   args: {
     title: 'Hello world',
-    userColor: 'brand1',
+    color: 'error',
   },
   decorators: [
     (Story) => (

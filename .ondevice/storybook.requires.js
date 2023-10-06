@@ -50,7 +50,10 @@ try {
 const getStories = () => {
   return {
     "./components/atoms/Button/index.stories.tsx": require("../components/atoms/Button/index.stories.tsx"),
+    "./components/atoms/Input/index.stories.tsx": require("../components/atoms/Input/index.stories.tsx"),
     "./components/atoms/Label/index.stories.tsx": require("../components/atoms/Label/index.stories.tsx"),
+    "./components/containers/Layout/index.stories.tsx": require("../components/containers/Layout/index.stories.tsx"),
+    "./components/molecules/SearchControls/index.stories.tsx": require("../components/molecules/SearchControls/index.stories.tsx"),
   };
 };
 

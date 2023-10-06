@@ -10,7 +10,7 @@ export const apiWeatherSlice = createApi({
   endpoints: (builder) => ({
     getWeatherLocation: builder.mutation({
       query: (name) => ({
-        url: `data/3.0/onecall?&exclude=hourly,minutely&appid=${API_KEY}&lon=${name.lon}&lat=${name.lat}`,
+        url: `data/3.0/onecall?&units=metric&exclude=hourly,minutely&appid=${API_KEY}&lon=${name.lon}&lat=${name.lat}`,
         method: 'GET',
       }),
     }),

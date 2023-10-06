@@ -6,13 +6,14 @@ import styled from 'styled-components/native'
 
 import { Button } from '../../../components/atoms/Button'
 import { Label } from '../../../components/atoms/Label'
+import { WeatherItem } from '../../../components/molecules/WeatherItem'
 import { useGetCityGeoDataMutation, useGetWeatherLocationMutation } from '../../api/weatherSlice'
 import { RootState } from '../../redux/configureStore'
 import { setCity, setWeather } from '../../redux/wether/weatherActions'
 
 export const WeatherPage = () => {
   const dispatch = useDispatch()
-  const weather = useSelector((state: RootState) => state.weather)
+  const { weather, city } = useSelector((state: RootState) => state.weather)
 
   const [getWeatherLocation, { data: weatherLocation }] = useGetWeatherLocationMutation()
   const [getCityGeoData, { data: cityLocation }] = useGetCityGeoDataMutation()
@@ -47,26 +48,27 @@ export const WeatherPage = () => {
   }
 
   const handleSubmit = () => {
-    if (weather.city) {
-      getCityGeoData(weather.city)
+    if (city) {
+      getCityGeoData(city)
     }
   }
 
   return (
     <Layout>
-      {weather.weather ? (
+      {weather ? (
         <View>
           <View>
             <TextInput
               onChangeText={handleInput}
               style={{ height: 40, margin: 12, borderWidth: 1, padding: 10 }}
-              value={weather.city}
+              value={city}
             />
             <Button onPress={handleSubmit} text={'Search'} textColor={'content1'} />
           </View>
           <ScrollView>
-            <Label title={JSON.stringify(weather.weather)} userColor={'error'} />
-            {cityLocation && <Label title={JSON.stringify(cityLocation[0])} userColor={'brand1'} />}
+            <WeatherItem timezone={weather.timezone_offset} {...weather.current} />
+            {/* <Label color={'error'} title={JSON.stringify(weather)} /> */}
+            {cityLocation && <Label title={JSON.stringify(cityLocation[0])} color={'content1'} />}
           </ScrollView>
         </View>
       ) : (

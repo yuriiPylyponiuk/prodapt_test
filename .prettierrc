@@ -10,7 +10,7 @@
     }
   ],
   "parser": "babel-ts",
-  "printWidth": 110,
+  "printWidth": 120,
   "quoteProps": "consistent",
   "semi": false,
   "singleQuote": true,
