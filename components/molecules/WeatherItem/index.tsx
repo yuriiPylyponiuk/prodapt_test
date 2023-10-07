@@ -1,12 +1,13 @@
 import { FC } from 'react'
-import { View } from 'react-native'
+import styled from 'styled-components/native'
 
-import { timestampToRegularTime } from '../../../src/helpers'
 import { Label } from '../../atoms/Label'
+import { icons } from '../../theme'
 
 export interface WeatherItemProps {
   city?: string
-  timezone: number
+  currentTime: number
+  status?: boolean
   dt: number
   sunrise: number
   sunset: number
@@ -25,23 +26,52 @@ export interface WeatherItemProps {
       id: number
       main: string
       description: string
-      icon: string
+      icon: typeof icons
     },
   ]
 }
 
-export const WeatherItem: FC<WeatherItemProps> = (data) => {
-  console.log(data)
+export const WeatherItem: FC<WeatherItemProps> = (data) => (
+  <CustomView>
+    {data.city && data.status ? (
+      <TitleView>
+        <Label uppercase color={'content2'} size={'height26'}>{`${data.city}`}</Label>
+      </TitleView>
+    ) : (
+      <TitleView>
+        <Label uppercase color={'content2'} size={'height26'}>
+          {'Your location'}
+        </Label>
+      </TitleView>
+    )}
 
-  return (
-    <View>
-      {data.city && <Label color={'error'}>{`${data.city}`}</Label>}
-      <Label color={'error'}>{`Last Update ${timestampToRegularTime(data.dt + data.timezone)}`}</Label>
-      <Label color={'error'}>{`Temperatura ${data.temp}`}</Label>
-      <Label color={'error'}>{`Feels like ${data.feels_like}`}</Label>
-      <Label color={'error'}>{`Humidity ${data.humidity}%`}</Label>
-      <Label color={'error'}>{`Pressure ${data.pressure}`}</Label>
-      <Label color={'error'}>{`Clouds ${data.clouds}%`}</Label>
-    </View>
-  )
-}
+    <DetailsView>
+      <Label color={'content2'}>{`${Math.round(data.temp)}/${Math.round(data.feels_like)} °C`}</Label>
+      <Label color={'content2'}>{`Humidity ${data.humidity}%`}</Label>
+      <Label color={'content2'}>{`Pressure ${data.pressure}hPa`}</Label>
+      <Label color={'content2'}>{`Clouds ${data.clouds}%`}</Label>
+    </DetailsView>
+  </CustomView>
+)
+
+const CustomView = styled.View`
+  margin-top: 20px;
+  margin-bottom: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+const TitleView = styled.View`
+  background-color: #033f266e;
+  justify-content: center;
+  align-items: center;
+  width: 49%;
+  border-radius: 10px;
+`
+
+const DetailsView = styled.View`
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #033f266e;
+  gap: 3px;
+`

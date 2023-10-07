@@ -1,24 +1,31 @@
+// Import statements
 import * as Location from 'expo-location'
 import React, { useEffect } from 'react'
-import { ScrollView, TextInput, View } from 'react-native'
+import { View } from 'react-native'
+import { ScrollView } from 'react-native-virtualized-view'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components/native'
 
-import { Button } from '../../../components/atoms/Button'
+// Components and utilities
 import { Label } from '../../../components/atoms/Label'
+import { SearchControls } from '../../../components/molecules/SearchControls'
 import { WeatherItem } from '../../../components/molecules/WeatherItem'
+import { WeatherPredict } from '../../../components/organism/WeatherPredict'
+import { images } from '../../../components/theme/'
 import { useGetCityGeoDataMutation, useGetWeatherLocationMutation } from '../../api/weatherSlice'
+import { timestampToRegularHour } from '../../helpers'
 import { RootState } from '../../redux/configureStore'
-import { setCity, setWeather } from '../../redux/wether/weatherActions'
+import { revertList, setCity, setFindStatus, setWeather } from '../../redux/wether/weatherActions'
 
 export const WeatherPage = () => {
   const dispatch = useDispatch()
-  const { weather, city } = useSelector((state: RootState) => state.weather)
+  const { weather, city, findStatus, revert } = useSelector((state: RootState) => state.weather)
 
-  const [getWeatherLocation, { data: weatherLocation }] = useGetWeatherLocationMutation()
-  const [getCityGeoData, { data: cityLocation }] = useGetCityGeoDataMutation()
+  const [getWeatherLocation] = useGetWeatherLocationMutation()
+  const [getCityGeoData] = useGetCityGeoDataMutation()
 
   useEffect(() => {
+    // Request location permission and fetch weather data on component mount
     ;(async () => {
       const { status } = await Location.requestForegroundPermissionsAsync()
       if (status !== 'granted') {
@@ -28,60 +35,124 @@ export const WeatherPage = () => {
       const location = await Location.getCurrentPositionAsync({})
       const { latitude, longitude } = location.coords
       getWeatherLocation({ lon: longitude, lat: latitude })
+        .unwrap()
+        .then((data: any) => {
+          dispatch(setWeather(data))
+          dispatch(setFindStatus(true))
+        })
     })()
   }, [])
-  useEffect(() => {
-    if (weatherLocation) {
-      dispatch(setWeather(weatherLocation))
-    }
-  }, [weatherLocation])
 
-  useEffect(() => {
-    if (cityLocation) {
-      const { lon, lat } = cityLocation[0]
-      getWeatherLocation({ lon, lat })
-    }
-  }, [cityLocation])
-
+  // Handle input city name
   const handleInput = (weatherData: string) => {
+    dispatch(setFindStatus(false))
     dispatch(setCity(weatherData))
   }
 
+  // Handle form submission and fetch weather data
   const handleSubmit = () => {
     if (city) {
       getCityGeoData(city)
+        .unwrap()
+        .then((data: any) => {
+          const { lon, lat } = data[0]
+
+          getWeatherLocation({ lon, lat })
+            .unwrap()
+            .then((wetherData: any) => {
+              dispatch(setWeather(wetherData))
+              dispatch(setFindStatus(true))
+            })
+        })
+        .catch(() => {
+          dispatch(setFindStatus(false))
+        })
     }
+  }
+
+  // Select background image based on time
+  const selectBg = (time: number) => {
+    const formatTime = timestampToRegularHour(time)
+
+    if (formatTime >= 6 && formatTime <= 20) {
+      return images.dark
+    } else {
+      return images.light
+    }
+  }
+
+  // Change order of weather data
+  const changeOrder = () => {
+    dispatch(revertList(!revert))
   }
 
   return (
     <Layout>
-      {weather ? (
-        <View>
+      {Object.keys(weather).length ? (
+        <ImgBg source={selectBg(weather.timezone_offset)} resizeMode={'cover'}>
           <View>
-            <TextInput
-              onChangeText={handleInput}
-              style={{ height: 40, margin: 12, borderWidth: 1, padding: 10 }}
-              value={city}
+            <SearchControls
+              layout={{
+                marginTop: 50,
+                color: 'transparent',
+                jsBetween: true,
+                width: 90,
+                center: true,
+                paddingH: 20,
+              }}
+              button={{
+                text: 'Search',
+                textColor: 'brandLight',
+                borderColor: 'background3',
+                bgColor: 'background1',
+                onPress: handleSubmit,
+              }}
+              input={{
+                width: 'width200',
+                handleInput,
+                label: { color: 'content6' },
+                borderColor: 'background7',
+                color: 'transparent',
+              }}
             />
-            <Button onPress={handleSubmit} text={'Search'} textColor={'content1'} />
+            {findStatus && (
+              <ScrollView>
+                <CustomView>
+                  <WeatherItem
+                    status={findStatus}
+                    currentTime={weather.timezone_offset}
+                    city={city}
+                    {...weather.current}
+                  />
+                  <WeatherPredict click={changeOrder} reverce={revert} weatherData={weather.daily} />
+                </CustomView>
+              </ScrollView>
+            )}
           </View>
-          <ScrollView>
-            <WeatherItem timezone={weather.timezone_offset} {...weather.current} />
-            {/* <Label color={'error'} title={JSON.stringify(weather)} /> */}
-            {cityLocation && <Label title={JSON.stringify(cityLocation[0])} color={'content1'} />}
-          </ScrollView>
-        </View>
+        </ImgBg>
       ) : (
-        <Label title={'Loading'} />
+        <Layout>
+          <Label color={'error'} title={'Loading'} />
+        </Layout>
       )}
     </Layout>
   )
 }
 
+// Styled components
+const CustomView = styled.View`
+  margin-horizontal: 20px;
+  box-sizing: border-box;
+`
+
 const Layout = styled.View`
-  flex: 1;
-  background-color: #fff;
-  padding-top: 20px;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex: 1;
+`
+
+const ImgBg = styled.ImageBackground`
+  flex: 1;
+  width: 100%;
+  height: 100%;
 `

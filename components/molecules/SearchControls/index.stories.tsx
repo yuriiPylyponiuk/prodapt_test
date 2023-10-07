@@ -9,8 +9,8 @@ const SearchControlsMeta: ComponentMeta<typeof SearchControls> = {
   component: SearchControls,
   args: {
     button: { pHeight: 13, text: 'Push', textColor: 'content1', bgColor: 'background5' },
-    input: { color: 'success' },
-    layout: { center: true, color: 'brandLight' },
+    input: { width: 'width200', color: 'success' },
+    layout: { marginTop: 10, center: true, color: 'brandLight' },
   },
   decorators: [
     (Story) => (

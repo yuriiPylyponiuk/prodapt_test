@@ -15,8 +15,7 @@ interface ViewportDefaultSizesType {
 }
 
 export const viewportSizes: ViewportSizesType = {
-  height: (height) =>
-    Math.round(viewportDefaultSizes.height((1.3 * height) / 10)),
+  height: (height) => Math.round(viewportDefaultSizes.height((1.3 * height) / 10)),
 
   width: (width) => Math.round(viewportDefaultSizes.width((2.65 * width) / 10)),
 }
@@ -98,7 +97,9 @@ const main = {
   width80: viewportSizes.width(80),
   width90: viewportSizes.width(90),
   width100: viewportSizes.width(100),
+  width120: viewportSizes.width(120),
   width150: viewportSizes.width(150),
+  width180: viewportSizes.width(180),
   width200: viewportSizes.width(200),
   width250: viewportSizes.width(250),
   width300: viewportSizes.width(300),

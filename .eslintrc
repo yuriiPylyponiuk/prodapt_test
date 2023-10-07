@@ -20,6 +20,8 @@
     "quote-props": ["warn", "consistent-as-needed"],
     "radix": "off",
     "react-hooks/rules-of-hooks": "error",
+    "react-native/no-inline-styles": "off",
+    "no-unused-expressions": "off",
     "react-hooks/exhaustive-deps": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-curly-brace-presence": ["error", "always"],

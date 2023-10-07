@@ -3,6 +3,8 @@ import * as types from './weatherActionTypes'
 const initialState = {
   weather: {},
   city: '',
+  findStatus: false,
+  revert: false,
 }
 
 export default function weatherReducer(state = initialState, action: any) {
@@ -17,6 +19,16 @@ export default function weatherReducer(state = initialState, action: any) {
       return {
         ...state,
         city: action.payload,
+      }
+    case types.FIND_STATUS:
+      return {
+        ...state,
+        findStatus: action.payload,
+      }
+    case types.REVERT_LIST:
+      return {
+        ...state,
+        revert: action.payload,
       }
 
     default:
